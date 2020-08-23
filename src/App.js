@@ -1,25 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import './index.css'
+import styled from '@emotion/styled'
+import Sidebar from './components/Sidebar';
+
+
+
+const AppContainer = styled.div`
+  background-color: #dadbd3;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .app__body{
+    display: flex;
+    background-color: #ededed;
+    margin-top: -50px;
+    height: 90vh;
+    width: 90vw;
+    max-width: 1240px;
+    box-shadow: -1px 4px 20px -6px rgba(0, 0, 0, 0.7)
+  }
+
+`;
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContainer>
+      <div className="app__body">
+        <Sidebar />
+      </div>
+    </AppContainer>
+  
   );
 }
 
