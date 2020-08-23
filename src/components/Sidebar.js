@@ -5,6 +5,7 @@ import DonutLargeIcon from '@material-ui/icons/DonutLargeOutlined'
 import ChatIcon from '@material-ui/icons/ChatOutlined'
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
+import SidebarChats from './SidebarChat';
 
 const SidebarContainer = styled.div`
     display: flex;
@@ -44,8 +45,13 @@ const SidebarContainer = styled.div`
     border: none;
     margin-left: 10px;
    }
-
-
+   .sidebar__chats{
+       display: flex;
+       flex-direction: column;
+       flex: 1;
+       overflow: scroll;
+       background-color: white;
+   }
 
 `;
 
@@ -77,7 +83,10 @@ function Sidebar() {
             </div>
 
             <div className="sidebar__chats">
-                
+                <SidebarChats addNewChat={'d'} />
+                <SidebarChats />
+                <SidebarChats />
+                <SidebarChats />
             </div>
 
         </SidebarContainer>
