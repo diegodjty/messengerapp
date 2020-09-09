@@ -27,16 +27,16 @@ function SidebarChats({addNewChat}) {
 
     const [seed, setSeed] = useState(0)
 
+    useEffect(()=>{
+        setSeed(Math.floor(Math.random() * 5000))
+    },[])
+
     const createChat = () =>{
         const roomName = prompt("Please enter name for chat");
         if(roomName){
             
         }
     }
-
-    useEffect(()=>{
-        setSeed(Math.floor(Math.random() * 5000))
-    },[])
 
     return !addNewChat ? (
         <SidebarChatsContainer>

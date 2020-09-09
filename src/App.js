@@ -1,8 +1,9 @@
 import React from 'react';
 import './index.css'
 import styled from '@emotion/styled'
-import Sidebar from './components/Sidebar';
 
+import Sidebar from './components/Sidebar';
+import Chat from './components/Chat'
 
 
 const AppContainer = styled.div`
@@ -31,6 +32,7 @@ function App() {
     <AppContainer>
       <div className="app__body">
         <Sidebar />
+        <Chat />
       </div>
     </AppContainer>
   
