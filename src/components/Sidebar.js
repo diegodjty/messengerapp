@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import styled from '@emotion/styled'
 import {Avatar, IconButton} from '@material-ui/core'
 import DonutLargeIcon from '@material-ui/icons/DonutLargeOutlined'
@@ -6,6 +6,7 @@ import ChatIcon from '@material-ui/icons/ChatOutlined'
 import MoreVertIcon from '@material-ui/icons/MoreVertOutlined'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
 import SidebarChats from './SidebarChat';
+import db from '../firebase/firebase.js'
 
 const SidebarContainer = styled.div`
     display: flex;
@@ -56,6 +57,20 @@ const SidebarContainer = styled.div`
 `;
 
 function Sidebar() {
+
+    const [rooms, setRooms] = useState([]);
+
+    useEffect(()=>{
+        db.collection('rooms').onSnapshot(snapshot =>(
+          setRooms(snapshot.docs.map( doc =>(
+              {
+                  id: doc.id,
+                  data: doc.data(),
+              }
+          )))  
+        ))
+    },[])
+
     return (
 
         <SidebarContainer>
@@ -84,9 +99,9 @@ function Sidebar() {
 
             <div className="sidebar__chats">
                 <SidebarChats addNewChat={'d'} />
-                <SidebarChats />
-                <SidebarChats />
-                <SidebarChats />
+                {rooms.map(room =>(
+                    <SidebarChats key={room.id} id={room.id} name={room.data.name} />
+                ))}
             </div>
 
         </SidebarContainer>

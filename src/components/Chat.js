@@ -99,8 +99,7 @@ function Chat() {
 
     const sendMessage = (e) => {
         e.preventDefault();
-        console.log(input)
-        setInput('')
+        setInput("")
     }
 
     useEffect(()=>{
@@ -139,7 +138,7 @@ function Chat() {
             <div className="chat__footer">
                 <InsertEmoticonIcon />
                 <form>
-                    <input type="text" onChange={(e) =>setInput(e.target.value)} placeholder="Type a message "/>
+                    <input type="text" onChange={(e) =>setInput(e.target.value)} value={input} placeholder="Type a message "/>
                     <button type="submit" onClick={sendMessage}>Send a message</button>
                 </form>
                 <MicIcon />
