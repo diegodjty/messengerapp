@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react'
+import { useParams} from 'react-router-dom'
 import styled from '@emotion/styled'
 import {Avatar,IconButton} from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
@@ -6,6 +7,7 @@ import AttachFileIcon from '@material-ui/icons/AttachFileOutlined'
 import Morevert from '@material-ui/icons/MoreVertOutlined'
 import InsertEmoticonIcon from '@material-ui/icons/InsertEmoticonOutlined'
 import MicIcon from '@material-ui/icons/MicOutlined'
+import db from '../firebase/firebase'
 
 const ChatContainer = styled.div`
     flex: .65;
@@ -96,6 +98,8 @@ function Chat() {
 
     const [seed, setSeed] = useState(0)
     const [input, setInput] = useState('')
+    const { roomId } = useParams('');
+    const [roomName, setRoomName] = useState("")
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -106,12 +110,20 @@ function Chat() {
         setSeed(Math.floor(Math.random() * 5000))
     },[])
 
+    useEffect(()=>{
+        if(roomId){
+            db.collection('rooms').doc(roomId).onSnapshot(snapshot =>(
+                setRoomName(snapshot.data().name)
+            ))
+        }
+    },[roomId])
+
     return (
         <ChatContainer>
             <div className="chat__header">
                 <Avatar src={`https://avatars.dicebear.com/api/human/${seed}.svg`}/>
                 <div className="chat__headerInfo">
-                    <h3>Room Name</h3>
+                    <h3>{roomName}</h3>
                     <p>Last seen at...</p>
                 </div>
                 <div className="chat_headerRight">

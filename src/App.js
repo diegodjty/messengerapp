@@ -1,4 +1,5 @@
 import React from 'react';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.css'
 import styled from '@emotion/styled'
 
@@ -31,8 +32,17 @@ function App() {
   return (
     <AppContainer>
       <div className="app__body">
-        <Sidebar />
-        <Chat />
+        <Router>
+          <Sidebar />
+          <Switch >
+            <Route path="/rooms/:roomId" >
+                <Chat />
+            </Route>
+            <Route path="/">
+              <h1>hello</h1>
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </AppContainer>
   
