@@ -1,10 +1,12 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './index.css'
 import styled from '@emotion/styled'
 
 import Sidebar from './components/Sidebar';
 import Chat from './components/Chat'
+import Login from './components/Login';
+import { useStateValue } from './redux/StateProvider';
 
 
 const AppContainer = styled.div`
@@ -29,21 +31,28 @@ const AppContainer = styled.div`
 
 
 function App() {
+
+  const [{user},dispatch] = useStateValue();
+
   return (
     <AppContainer>
-      <div className="app__body">
-        <Router>
-          <Sidebar />
-          <Switch >
-            <Route path="/rooms/:roomId" >
-                <Chat />
-            </Route>
-            <Route path="/">
-              <h1>hello</h1>
-            </Route>
-          </Switch>
-        </Router>
-      </div>
+      {!user ? (
+        <Login />
+      ):(
+        <div className="app__body">
+          <Router>
+            <Sidebar />
+            <Switch >
+              <Route path="/rooms/:roomId" >
+                  <Chat />
+              </Route>
+              <Route path="/">
+                <h1>hello</h1>
+              </Route>
+            </Switch>
+          </Router>
+        </div>
+      )}
     </AppContainer>
   
   );
