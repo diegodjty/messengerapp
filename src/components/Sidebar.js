@@ -7,6 +7,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVertOutlined'
 import SearchIcon from '@material-ui/icons/SearchOutlined'
 import SidebarChats from './SidebarChat';
 import db from '../firebase/firebase.js'
+import { useStateValue } from '../redux/StateProvider';
 
 const SidebarContainer = styled.div`
     display: flex;
@@ -59,6 +60,7 @@ const SidebarContainer = styled.div`
 function Sidebar() {
 
     const [rooms, setRooms] = useState([]);
+    const [{user}, dispatch] = useStateValue();
 
     useEffect(()=>{
         db.collection('rooms').onSnapshot(snapshot =>(
@@ -75,7 +77,7 @@ function Sidebar() {
 
         <SidebarContainer>
             <div className="sidebar__header">
-                <Avatar />
+                <Avatar src={user?.photoURL} />
                 <div className="sidebar__headerRight">
                     <IconButton>
                         <DonutLargeIcon />
